@@ -2,17 +2,25 @@ import streamlit as st
 import mysql.connector
 import pandas as pd
 import re
+import os
+from dotenv import load_dotenv
+
+# Cargar las variables del archivo .env
+load_dotenv()
+
+def conectar_db():
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
+    )
 
 # 1. CONFIGURACIÓN
 st.set_page_config(page_title="Plásticos Esba - Sistema de Gestión", layout="wide")
 
-def conectar_db():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",         # <--- PON TU USUARIO REAL
-        password="Password123!",     # <--- PON TU PASSWORD REAL
-        database="db_analisis_sandbox"
-    )
+    
+    
 
 def leer_xml_factura(xml_data):
     try:
