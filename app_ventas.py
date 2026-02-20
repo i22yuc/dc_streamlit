@@ -4,9 +4,21 @@ import pandas as pd
 import re
 import os
 from dotenv import load_dotenv
+load_dotenv()  # Esto busca el archivo .env y carga las variables
+
+# Prueba de diagnóstico rápida:
+db_pass = os.getenv('DB_PASS')
+print(f"La contraseña cargada es: {db_pass}")
+
 
 # Cargar las variables del archivo .env
 load_dotenv()
+
+# PRUEBA DE DIAGNÓSTICO (Solo para ver en la terminal)
+if not os.getenv("DB_PASS"):
+    st.error("❌ El archivo .env no se cargó o está vacío.")
+else:
+    st.success("✅ Variables de entorno detectadas.")
 
 def conectar_db():
     return mysql.connector.connect(
